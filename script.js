@@ -74,6 +74,12 @@ const locations = [
     "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
     "button functions": [restart, restart, restart],
     text: "You die. &#x2620;"
+  },
+  {
+    name: "win",
+    "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
+    "button functions": [restart, restart, restart],
+    text: "You defeat the dragon! YOU WIN THE GAME! &#x1F389;"
   }
 ];
 // initialize buttons
@@ -89,7 +95,7 @@ button3.innerText = location["button text"][2];
 button1.onclick = location["button functions"][0];
 button2.onclick = location["button functions"][1];
 button3.onclick = location["button functions"][2];
-text.innerText = location.text;
+text.innerHTML = location.text;
 }
   
 function goTown() {
@@ -178,6 +184,12 @@ function attack() {
   }
   else if(monsterHealth <= 0){
     defeatMonster();
+    if(fighting === 2){
+      winGame();
+    }
+    else{
+      defeatMonster();
+    }
   }
 }
 function dodge() {
@@ -192,6 +204,9 @@ function defeatMonster() {
 }
 function lose() {
   update(locations[5]);
+}
+function winGame(){
+  update(locations[6]);
 }
 function restart() {
   xp = 0;
